@@ -2,22 +2,24 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Darts Game</title>
+  <title>Чемпионат ГК Юнисервис</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="gameContainer">
-    <div class="player-box" id="player1Box">
-      <input type="text" id="player1Name" placeholder="Игрок 1">
-    </div>
-    <div id="boardContainer">
-      <canvas id="dartboardCanvas" width="600" height="600"></canvas>
-      <div id="scoreDisplay"></div>
-    </div>
-    <div class="player-box" id="player2Box">
-      <input type="text" id="player2Name" placeholder="Игрок 2">
-    </div>
+  <h2>🎯 Чемпионат ГК Юнисервис</h2>
+
+  <div class="player-inputs">
+    <input id="player1Name" placeholder="Имя игрока №1" />
+    <input id="player2Name" placeholder="Имя игрока №2" />
   </div>
+
+  <canvas id="dartboardCanvas" width="600" height="600"></canvas>
+
+  <div id="scoreDisplay"></div>
+  <button id="undoBtn">↩️ Отменить последний бросок</button>
+
+  <canvas id="fireworksCanvas"></canvas>
+
   <script src="script.js"></script>
 </body>
 </html>
