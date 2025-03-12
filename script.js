@@ -1,96 +1,90 @@
-"use strict";
+const canvas = document.getElementById("dartboardCanvas");
+const ctx = canvas.getContext("2d");
+const scoreDisplay = document.getElementById("scoreDisplay");
 
-const canvas = document.getElementById('dartboardCanvas');
-const ctx = canvas.getContext('2d');
-const sectors = [20, 1, 18, 4, 13, 6, 10, 15, 2, 17,
+const player1Name = document.getElementById("player1Name");
+const player2Name = document.getElementById("player2Name");
+
+let throwHistory = [];
+const sectors = [20, 1, 18, 4, 13, 6, 10, 15, 2, 17, 
                  3, 19, 7, 16, 8, 11, 14, 9, 12, 5];
 
-function drawBoard(){
-    const radius = canvas.width / 2;
-    const centerX = radius;
-    const centerY = radius;
+const radius = canvas.width / 2;
+const centerX = radius;
+const centerY = radius;
+const angleStep = Math.PI * 2 / 20;
+const rotation = -9 * Math.PI / 180;
+const startAngle = -Math.PI / 2 + rotation;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function drawBoard() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+  ctx.fillStyle = "#000";
+  ctx.fill();
 
-    // Основные сектора с чередованием цветов
-    for(let i = 0; i < 20; i++){
-        const angle = (Math.PI * 2 / 20);
-        const startAngle = angle * i - Math.PI / 2 - angle / 2;
-        const endAngle = angle * (i + 1) - Math.PI / 2 - angle / 2;
-
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.arc(centerX,centerY,radius,startAngle,endAngle);
-        ctx.closePath();
-        ctx.fillStyle = i % 2 ? '#000' : '#fff';
-        ctx.fill();
-    }
-
-    // Рисуем двойное кольцо
-    for(let i = 0; i < 20; i++){
-        const angle = (Math.PI * 2 / 20);
-        const startAngle = angle * i - Math.PI / 2 - angle / 2;
-        const endAngle = angle * (i + 1) - Math.PI / 2 - angle / 2;
-
-        ctx.beginPath();
-        ctx.arc(centerX,centerY,radius*0.95,startAngle,endAngle,false);
-        ctx.arc(centerX,centerY,radius*0.85,endAngle,startAngle,true);
-        ctx.closePath();
-        ctx.fillStyle = i % 2 ? '#D32F2F': '#388E3C';
-        ctx.fill();
-    }
-
-    // Рисуем тройное кольцо
-    for(let i = 0; i < 20; i++){
-        const angle = (Math.PI * 2 / 20);
-        const startAngle = angle * i - Math.PI / 2 - angle / 2;
-        const endAngle = angle * (i + 1) - Math.PI / 2 - angle / 2;
-
-        ctx.beginPath();
-        ctx.arc(centerX,centerY,radius*0.6,startAngle,endAngle,false);
-        ctx.arc(centerX,centerY,radius*0.5,endAngle,startAngle,true);
-        ctx.closePath();
-        ctx.fillStyle = i % 2 ? '#D32F2F': '#388E3C';
-        ctx.fill();
-    }
-
-    // Внешний центр (зеленый)
-    ctx.fillStyle = '#388E3C';
+  for (let i = 0; i < 20; i++) {
     ctx.beginPath();
-    ctx.arc(centerX, centerY, radius * 0.08, 0, Math.PI*2);
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius * 0.85, startAngle + i * angleStep, startAngle + (i + 1) * angleStep);
+    ctx.closePath();
+    ctx.fillStyle = i % 2 === 0 ? "#000" : "#fff";
     ctx.fill();
+  }
+  drawRing(radius * 0.50, radius * 0.55, 'red', 'green');
+  drawRing(radius * 0.80, radius * 0.85, 'red', 'green');
 
-    // Внутренний центр (красный)
-    ctx.fillStyle = '#D32F2F';
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius * 0.04, 0, Math.PI*2);
-    ctx.fill();
-
-    // Нумерация секторов - количество очков напротив каждого сектора
-    ctx.fillStyle = 'white';
-    ctx.font = `bold ${radius*0.07}px Arial`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    for(let i = 0; i < 20; i++){
-        const angle = (Math.PI*2 / 20)*i - Math.PI/2;
-        const x = centerX + Math.cos(angle)*(radius*1.05);
-        const y = centerY + Math.sin(angle)*(radius*1.05);
-        ctx.fillText(sectors[i], x, y);
-    }
+  ctx.fillStyle = "white";
+  ctx.font = `${radius * 0.07}px Arial`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (let i = 0; i < 20; i++) {
+    const numAngle = startAngle + i * angleStep + angleStep / 2;
+    const x = centerX + Math.cos(numAngle) * radius * 0.93;
+    const y = centerY + Math.sin(numAngle) * radius * 0.93;
+    ctx.fillText(sectors[i], x, y);
+  }
 }
 
-// Обработка клика по мишени
-function handleCanvasClick(e){
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left - canvas.width / 2;
-    const y = e.clientY - rect.top - canvas.height / 2;
-    const angle = (Math.atan2(y, x) * 180 / Math.PI + 450) % 360;
-    const sectorIndex = Math.floor(angle / 18);
-    const score = sectors[sectorIndex];
+function drawRing(innerRadius, outerRadius, color1, color2) {
+  for (let i = 0; i < 20; i++) {
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, outerRadius, startAngle + i * angleStep, startAngle + (i + 1) * angleStep);
+    ctx.arc(centerX, centerY, innerRadius, startAngle + (i + 1) * angleStep, startAngle + i * angleStep, true);
+    ctx.closePath();
+    ctx.fillStyle = i % 2 === 0 ? color1 : color2;
+    ctx.fill();
+  }
+}
 
-    alert('Вы попали в сектор ' + score);
+function handleCanvasClick(e) {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left - centerX;
+  const y = e.clientY - rect.top - centerY;
+  const dist = Math.hypot(x, y);
+
+  const clickAngle = Math.atan2(y, x);
+  const normalizedAngle = (clickAngle + Math.PI / 2 - rotation + 2 * Math.PI) % (2 * Math.PI);
+  const sectorIdx = Math.floor(normalizedAngle / angleStep);
+  const sectorValue = sectors[sectorIdx];
+  const currentScore = dist <= radius * 0.025 ? 50 :
+                       dist <= radius * 0.06 ? 25 :
+                       dist >= radius * 0.80 && dist <= radius * 0.85 ? sectorValue*2 :
+                       dist >= radius * 0.50 && dist <= radius * 0.55 ? sectorValue*3 :
+                       dist > radius * 0.85 ? 0 : sectorValue;
+
+  throwHistory.unshift(currentScore);
+  if(throwHistory.length > 10) throwHistory.pop();
+  updateScoreDisplay();
+}
+
+function updateScoreDisplay() {
+  const p1 = player1Name.value || 'Игрок №1';
+  const p2 = player2Name.value || 'Игрок №2';
+  let historyHtml = `<b>${p1} vs ${p2}</b><br><br>Броски:<br>`;
+  historyHtml += throwHistory.map((score, idx) => `${idx + 1}. ${score} очков`).join("<br>");
+  scoreDisplay.innerHTML = historyHtml;
 }
 
 drawBoard();
-canvas.addEventListener('click', handleCanvasClick);
+canvas.addEventListener("click", handleCanvasClick);
