@@ -1,15 +1,13 @@
-body{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #333;
+body {
+  display:flex; 
+  justify-content:center; 
+  align-items:center; 
+  height:100vh; 
+  background-color:#333;
+  margin:0;
 }
-
-canvas{
-  border: 3px solid #222;
-  background-color: #111;
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+canvas {
+  background:#111; 
+  border-radius:50%; 
+  box-shadow:0 0 15px rgba(0,0,0,.7);
 }
