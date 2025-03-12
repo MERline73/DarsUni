@@ -2,30 +2,14 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Telegram Dartboard WebApp</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darts WebApp</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h2>ЧЕМПИОНАТ ГК ЮНИСЕРВИС</h2>
-
-    <input placeholder="Игрок 1" id="player1Name">
-    <input placeholder="Игрок 2" id="player2Name">
-
-    <canvas id="dartboard" width="300" height="300"></canvas>
-
-    <div id="roundInfo">Раунд: 1/10</div>
-    <div id="status">Игрок 1 бросает</div>
-    <div id="throwResult"></div>
-
-    <div class="playerScore" id="player1Score">Игрок 1: 0</div>
-    <div class="playerScore" id="player2Score">Игрок 2: 0</div>
-
-    <button id="undoBtn">Отменить бросок</button>
-    <button id="resetBtn">Перезапустить игру</button>
-  </div>
-
-<script src="script.js"></script>
+    <div class="game-container">
+        <canvas id="dartboardCanvas" width="500" height="500"></canvas>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
