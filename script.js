@@ -144,4 +144,34 @@ function launchFireworks() {
     if(salutesFired>=12){clearInterval(saluteInterval);}
   },800);
 }
+// Функция для запуска анимации победителя
+function showWinner(winnerName) {
+  // Находим контейнер и имя победителя
+  const winnerContainer = document.getElementById('winner-container');
+  const winnerText = document.getElementById('winner-name');
+
+  // Устанавливаем имя победителя
+  winnerText.textContent = winnerName;
+
+  // Делаем контейнер видимым
+  winnerContainer.classList.add('winner-visible');
+
+  // Запускаем анимацию
+  winnerContainer.style.animation = 'flyIn 3s ease-out';
+
+  // Прячем имя через 3 секунды
+  setTimeout(() => {
+    winnerContainer.classList.remove('winner-visible');
+  }, 3000);
+}
+
+// Пример использования после завершения игры
+// Например, в конце игры вызываем showWinner, передавая имя победителя
+if (player1Score > player2Score) {
+  showWinner(player1Name);
+} else if (player2Score > player1Score) {
+  showWinner(player2Name);
+} else {
+  showWinner("Ничья");
+}
 drawBoard();updateScoreDisplay();
