@@ -1,29 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Чемпионат ГК Юнисервис</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чемпионат ГК Юнисервис</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>🎯 Чемпионат ГК Юнисервис</h2>
+    <div id="fireworks"></div>
+    <div id="winner-container" class="winner-hidden">
+        <span id="winner-name"></span>
+    </div>
 
-  <div class="player-inputs">
-    <input id="player1Name" placeholder="Имя игрока №1" />
-    <input id="player2Name" placeholder="Имя игрока №2" />
-  </div>
-
-  <canvas id="dartboardCanvas" width="600" height="600"></canvas>
-
-  <div id="scoreDisplay"></div>
-  <button id="undoBtn">↩️ Отменить последний бросок</button>
-
-  <div id="winner-container" class="winner-hidden">
-    <span id="winner-name"></span>
-  </div>
-
-  <canvas id="fireworksCanvas"></canvas>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
