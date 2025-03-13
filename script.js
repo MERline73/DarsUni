@@ -91,8 +91,86 @@ function updateScoreDisplay(){
 }
 
 function endGame(){
-  gameOver=true;let winner=player1Score>player2Score?(player1Name.value||'Игрок №1'):(player1Score<player2Score?(player2Name.value||'Игрок №2'):'Ничья!');
-  alert(`🎯 Игра окончена!\n\nИгрок №1: ${player1Score}\nИгрок №2: ${player2Score}\n\nПобедитель: ${winner}`);
+  gameOver=true;
+  const p1=player1Name.value||'Игрок №1';
+  const p2=player2Name.value||'Игрок №2';
+  let winner;
+  if(player1Score>player2Score) winner=`Победитель: ${p1}! 🎉`;
+  else if(player2Score>player1Score) winner=`Победитель: ${p2}! 🎉`;
+  else winner="🤝 Ничья!";
+
+  // Сообщение с результатами
+  alert(`🏆 Результаты:\n\n${p1}: ${player1Score} очков\n${p2}: ${player2Score} очков\n\n${winner}`);
+
+  // Запускаем салют
+  launchFireworks();
+}
+
+// Салют на канвасе
+function launchFireworks() {
+  const fwCanvas = document.getElementById('fireworksCanvas');
+  const fwCtx = fwCanvas.getContext('2d');
+  fwCanvas.style.display='block';
+  fwCanvas.width = window.innerWidth;
+  fwCanvas.height = window.innerHeight;
+
+  const particles = [];
+
+  // класс частиц для салюта
+  class Particle{
+    constructor(x,y,color){
+      this.x=x;this.y=y;
+      this.speed=Math.random()*6+2;
+      this.angle=Math.random()*Math.PI*2;
+      this.color=color;
+      this.life=Math.random()*50+50;
+      this.size=Math.random()*3+1;
+      this.gravity=0.03;
+      this.opacity=1;
+    }
+
+    update(){
+      this.speed*=0.98; // замедление
+      this.x+=Math.cos(this.angle)*this.speed;
+      this.y+=Math.sin(this.angle)*this.speed+this.gravity;
+      this.opacity-=0.015; // исчезновение
+      this.life--;
+    }
+
+    draw(){
+      fwCtx.globalAlpha=this.opacity;
+      fwCtx.fillStyle=this.color;
+      fwCtx.beginPath();
+      fwCtx.arc(this.x,this.y,this.size,0,Math.PI*2);
+      fwCtx.fill();
+    }
+  }
+
+  // Анимация салюта
+  function animate(){
+    fwCtx.fillStyle='rgba(0,0,0,0.1)';
+    fwCtx.fillRect(0,0,fwCanvas.width,fwCanvas.height);
+    particles.forEach((particle,i)=>{
+      particle.update();
+      particle.draw();
+      if(particle.life<=0||particle.opacity<=0) particles.splice(i,1);
+    });
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  // Запускаем праздничные залпы с разными цветами
+  const colors=['#ff3f81','#3fa9ff','#ffbc41','#3bff7a','#a03dff','#ff3030','#3dffaa'];
+  let salutesFired=0;
+  const saluteInterval=setInterval(()=>{
+    const x=Math.random()*fwCanvas.width*0.6+fwCanvas.width*0.2;
+    const y=Math.random()*fwCanvas.height*0.5+fwCanvas.height*0.1;
+    const color=colors[Math.floor(Math.random()*colors.length)];
+    for(let i=0;i<100;i++) particles.push(new Particle(x,y,color));
+    salutesFired++;
+    if(salutesFired>=12){clearInterval(saluteInterval);}
+  },800);
 }
 
 drawBoard();updateScoreDisplay();
