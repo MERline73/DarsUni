@@ -75,41 +75,19 @@ function endGame() {
   alert(`🏆 Результаты:\n\n${p1}: ${player1Score} очков\n${p2}: ${player2Score} очков\n\n${winner}`);
 
   // Отправка очков на сервер
-  fetch('http://94.103.87.192:5000/add_score', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      player_name: p1,
-      score: player1Score
+  fetch('http://94.103.87.192:5000/add_score',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+            player1:player1Name.value,score1:player1Score,
+            player2:player2Name.value,score2:player2Score
+        })
     })
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(`Очки для ${p1}:`, data);
-  })
-  .catch(error => {
-    console.error(`Ошибка отправки очков для ${p1}:`, error);
-  });
+    .then(res=>res.json())
+    .then(data=>console.log('Результат отправлен:',data))
+    .catch(err=>console.error('Ошибка отправки данных:',err));
 
-  fetch('http://94.103.87.192:5000/add_score', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      player_name: p2,
-      score: player2Score
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(`Очки для ${p2}:`, data);
-  })
-  .catch(error => {
-    console.error(`Ошибка отправки очков для ${p2}:`, error);
-  });
+    launchFireworks(); // добавлено, чтобы запускать салют после игры
 }
 
 // Салют на канвасе
