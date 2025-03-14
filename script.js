@@ -75,7 +75,7 @@ function endGame() {
   alert(`🏆 Результаты:\n\n${p1}: ${player1Score} очков\n${p2}: ${player2Score} очков\n\n${winner}`);
 
   // Отправка очков на сервер
-  fetch('https://94.103.87.192:5000/add_score', { ... })
+  fetch('http://94.103.87.192:5000/add_score') // правильно!
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
