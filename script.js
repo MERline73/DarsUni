@@ -66,6 +66,7 @@ function endGame() {
   gameOver = true;
   const p1 = player1Name.value || 'Игрок №1';
   const p2 = player2Name.value || 'Игрок №2';
+
   let winner;
   if (player1Score > player2Score) winner = `Победитель: ${p1}! 🎉`;
   else if (player2Score > player1Score) winner = `Победитель: ${p2}! 🎉`;
@@ -74,20 +75,46 @@ function endGame() {
   // Сообщение с результатами
   alert(`🏆 Результаты:\n\n${p1}: ${player1Score} очков\n${p2}: ${player2Score} очков\n\n${winner}`);
 
-  // Отправка очков на сервер
-  fetch('http://94.103.87.192:5000/add_score') // правильно!
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-            player1:player1Name.value,score1:player1Score,
-            player2:player2Name.value,score2:player2Score
-        })
+  // Отправка очков на сервер для игрока 1
+  fetch('http://94.103.87.192:5000/add_score', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      player_name: p1,
+      score: player1Score
     })
-    .then(res=>res.json())
-    .then(data=>console.log('Результат отправлен:',data))
-    .catch(err=>console.error('Ошибка отправки данных:',err));
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(`Очки для ${p1}:`, data);
+  })
+  .catch(error => {
+    console.error(`Ошибка отправки очков для ${p1}:`, error);
+  });
 
-    launchFireworks(); // добавлено, чтобы запускать салют после игры
+  // Отправка очков на сервер для игрока 2
+  fetch('http://94.103.87.192:5000/add_score', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      player_name: p2,
+      score: player2Score
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(`Очки для ${p2}:`, data);
+  })
+  .catch(error => {
+    console.error(`Ошибка отправки очков для ${p2}:`, error);
+  });
+
+  // Запуск фейерверка после завершения игры
+  launchFireworks();
 }
 
 // Салют на канвасе
