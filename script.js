@@ -76,7 +76,7 @@ function endGame() {
   alert(`🏆 Результаты:\n\n${p1}: ${player1Score} очков\n${p2}: ${player2Score} очков\n\n${winner}`);
 
   // Отправка очков на сервер для игрока 1
-  fetch('https://94.103.87.192:5000/add_score', {
+  fetch('https://darsuni.duckdns.org:5000/add_score', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function endGame() {
   });
 
   // Отправка очков на сервер для игрока 2
-  fetch('http://94.103.87.192:5000/add_score', {
+  fetch('https://darsuni.duckdns.org:5000/add_score', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
