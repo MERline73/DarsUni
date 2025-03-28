@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История Результатов</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Подключение общего CSS -->
+</head>
+<body>
+    <header>
+        <h1>История Результатов</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Игра</a></li>
+                <li><a href="history.html">История</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="tournament-grid">
+        <h2>Турнирная Сетка</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Игрок 1</th>
+                    <th>Игрок 2</th>
+                    <th>Результат</th>
+                </tr>
+            </thead>
+            <tbody id="tournament-body">
+                <!-- Сюда будут добавляться результаты игр -->
+            </tbody>
+        </table>
+    </section>
+
+    <section class="history-results">
+        <h2>Результаты Игры</h2>
+        <ul id="history-list">
+            <!-- История игр будет здесь -->
+        </ul>
+    </section>
+
+    <script src="history.js"></script> <!-- Подключаем JS для обработки истории -->
+</body>
+</html>
