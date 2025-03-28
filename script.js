@@ -61,7 +61,19 @@ const drawRing=(inner, outer, cA, cB)=>{for(let i=0;i<20;i++){ctx.beginPath();ct
 function updateScoreDisplay(){scoreDisplay.innerHTML=`${player1Name.value||'Игрок №1'}: ${player1Score}<br/>${player2Name.value||'Игрок №2'}: ${player2Score}<br/>Раунд: ${rounds}${gameOver?' – Игра окончена!':''}<br><br>Последние броски: ${throwHistory}`;}
 
 function endGame(){gameOver=true;const winner=player1Score>player2Score?(player1Name.value||'Игрок №1'):(player2Score>player1Score)?(player2Name.value||'Игрок №2'):'Ничья!';alert(`🎯 Игра окончена!\n\n${winner}`);}
-
+function updateScore(player, points) {
+    if (player === 'player1') {
+        player1LastRound = points; // Обновляем очки за последний раунд
+        player1Total += points; // Обновляем общий счет
+        document.getElementById('player1-last-round').textContent = player1LastRound; // Отображаем
+        document.getElementById('player1-total').textContent = player1Total; // Отображаем общий счет
+    } else if (player === 'player2') {
+        player2LastRound = points; // Обновляем очки за последний раунд
+        player2Total += points; // Обновляем общий счет
+        document.getElementById('player2-last-round').textContent = player2LastRound; // Отображаем
+        document.getElementById('player2-total').textContent = player2Total; // Отображаем общий счет
+    }
+}
 function endGame() {
   gameOver = true;
   const p1 = player1Name.value || 'Игрок №1';
