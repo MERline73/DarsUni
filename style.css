@@ -48,3 +48,22 @@ button {
   pointer-events: none;
   display: none; /* появляется только в конце */
 }
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    .tournament-grid, .history-results {
+        padding: 10px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 0.9em;
+    }
+}
