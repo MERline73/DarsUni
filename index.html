@@ -1,11 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-<nav>
-    <ul>
-        <li><a href="index.html">Игра</a></li>
-        <li><a href="history.html">История</a></li> <!-- Ссылка на историю -->
-    </ul>
-</nav>
 <head>
   <meta charset="UTF-8">
   <title>Чемпионат ГК Юнисервис</title>
@@ -14,9 +8,12 @@
 <body>
   <h2>🎯 Чемпионат ГК Юнисервис</h2>
 
- 
+  <div class="player-inputs">
+    <input id="player1Name" placeholder="Имя игрока №1" />
+    <input id="player2Name" placeholder="Имя игрока №2" />
+  </div>
+
   <canvas id="dartboardCanvas" width="600" height="600"></canvas>
-    
 
   <div id="scoreDisplay"></div>
   <button id="undoBtn">↩️ Отменить последний бросок</button>
@@ -26,3 +23,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
