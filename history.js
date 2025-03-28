@@ -36,24 +36,39 @@ function updateTournamentGrid() {
     });
 }
 
-// Функция для добавления нового результата игры в историю и сохранение в localStorage
+// Функция для добавления нового результата игры в localStorage
 function addNewGameResult(player1, player2, winner, score) {
-    const newGame = {
+    const gameResult = {
         player1: player1,
         player2: player2,
         winner: winner,
         score: score,
     };
 
-    let gameHistory = loadHistoryFromStorage(); // Загружаем текущую историю
-    gameHistory.push(newGame); // Добавляем новый результат
+    let savedGames = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    savedGames.push(gameResult);  // Добавляем новый результат в сохраненные игры
+    localStorage.setItem('gameHistory', JSON.stringify(savedGames));  // Сохраняем в localStorage
 
-    localStorage.setItem('gameHistory', JSON.stringify(gameHistory)); // Сохраняем обновленную историю в localStorage
+    updateHistory();  // Обновляем отображение истории
+    updateTournamentGrid();  // Обновляем турнирную сетку
+}
 
-    updateHistory(); // Обновляем отображение истории
-    updateTournamentGrid(); // Обновляем турнирную сетку
+// Функция для очищения истории игр
+function clearHistory() {
+    localStorage.removeItem('gameHistory');  // Очищаем историю игр из localStorage
+    updateHistory();  // Обновляем отображение истории
+    updateTournamentGrid();  // Обновляем турнирную сетку
 }
 
 // Вызовем функции при загрузке страницы для начальной настройки
-updateHistory();
-updateTournamentGrid();
+document.addEventListener('DOMContentLoaded', () => {
+    updateHistory();
+    updateTournamentGrid();
+});
+
+// Пример использования функции добавления нового результата игры
+// Например, эта функция будет вызываться после завершения каждой игры:
+addNewGameResult('Олег', 'Сергей', 'Сергей', '140');
+
+// Если нужно очистить историю, можно использовать:
+clearHistory();  // Очистить всю историю
