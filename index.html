@@ -82,11 +82,24 @@
       box-shadow: 0 0 3px #c97c3a;
       background: #ffae00;
     }
+    .retro-video {
+      margin:26px 0 0 0;
+      border-radius:12px;
+      box-shadow: 0 0 18px #ed6c33;
+      width:320px;
+      max-width:90vw;
+      border: 3px solid #ffd56c;
+      display:block;
+      margin-left:auto;
+      margin-right:auto;
+      background: #110b21;
+    }
     @media (max-width:500px) {
       .message{font-size:14px;}
       .coin{width:44px;height:44px;}
       .player{width:32px;height:32px;}
       .sub{font-size:10px;}
+      .retro-video{width:95vw;}
     }
   </style>
 </head>
@@ -96,6 +109,15 @@
     <div class="message">
       Пробный период окончен,<br>обратитесь в техничкую дирекцию<br>для оплаты
     </div>
+    <!-- WebM видео (стикер) -->
+    <video
+      src="sticker.webm"
+      autoplay
+      loop
+      muted
+      playsinline
+      class="retro-video"
+    ></video>
     <div class="player"></div>
     <div class="sub">unidars.ru &copy; 2024</div>
     <button class="music-btn" onclick="toggleMusic()">&#127925; Включить музыку</button>
@@ -105,8 +127,6 @@
     Ваш браузер не поддерживает звук!
   </audio>
   <script>
-    // Простая 8-битная "дудка" на встроенном Web Audio API
-    // Для максимальной совместимости сделан также аудиофайл-эмбед (маленький loop)
     const music = document.getElementById('music');
     function toggleMusic() {
       if (music.paused) {
