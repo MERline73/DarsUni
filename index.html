@@ -1,32 +1,124 @@
 <!DOCTYPE html>
 <html lang="ru">
-<nav>
-    <ul>
-        <li><a href="index.html">Игра</a></li>
-        <li><a href="history.html">История</a></li> <!-- Ссылка на историю -->
-    </ul>
-</nav>
-
 <head>
   <meta charset="UTF-8">
-  <title>Чемпионат ГК Юнисервис</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Доступ закрыт</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(180deg, #261c2c 0%, #43315f 100%);
+      color: #fafafa;
+      font-family: 'Press Start 2P', monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      text-align: center;
+    }
+    .message {
+      font-size: 24px;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 0 #000, 4px 4px 0 #ed6c33;
+      animation: blink 2s steps(1) infinite;
+    }
+    @keyframes blink {
+      50% { text-shadow: 2px 2px 0 #ed6c33, 4px 4px 0 #000; }
+    }
+    .coin {
+      display: inline-block;
+      width: 72px;
+      height: 72px;
+      margin-bottom:16px;
+      image-rendering: pixelated;
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAQCAYAAAD9cG9oAAAACXBIWXMAAAsSAAALEgHS3X78AAACg0lEQVR4nKXSwytEURkH8P9TOBUZK8AEvxOPgVkIQ+mThXkqSoVyo2bFEdrfBJEkFVMsHGRkYq6tsZ3L8u7tT/17vj/rImr1Q6J/PewLZez12zuAorSR9oP8zRr0Wel7zvtLSk/J6SCNiTXw+mROuPAlF0yuvkOkJozHUr9QGZkJuMUSyE4C0pVvEisfBoNEn2xGYBpTfNJFgkJWkfXKehBlNBpHr1nM3L1vusyxGAy3kIdmAlL4WvuXZwr7R9AAhrZE2QzhhIYrJ/8naaSC6HyOpVdv4hrl6Du3E1VhA1twKnMIp7EINXYBY8B2pIC6oQ4LOekivBCRrF0SvAw6Hm4pZI6t4MbNIdXeUb4kJMeIytwLvjXC4JWhXYIAmnIb5lO4znUgPjCKR3grtEtqlkJvk5MwtE1uA923t6Rx3JLBG14oFvexU4Jo2EXygsDJ8jqx7Ic0ZhJex8NVw9pBtv2qxv3LrYIQuQJecA1WhuohJrgy9bD0MUs8hLhwTDIETXB56Pyr1ZD5pr1B155HyaR8YyJe6eBofssOmoDVuDoF+maidP6wnZllYbSJz04FbF6P8wPrA77wvlPuJc5uMZE9YAAAAASUVORK5CYII=') center/contain no-repeat;
+      animation: coinSpin 1s steps(8) infinite;
+    }
+    @keyframes coinSpin {
+      100% { filter: hue-rotate(360deg);}
+    }
+    .player {
+      width: 48px;
+      height: 48px;
+      margin-top: 36px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><rect x=\'8\' y=\'34\' width=\'32\' height=\'10\' rx=\'5\' fill=\'%23330\'/><rect x=\'10\' y=\'14\' width=\'28\' height=\'22\' rx=\'8\' fill=\'%23559cdf\' stroke=\'%230057aa\'/><circle cx=\'24\' cy=\'10\' r=\'9\' fill=\'%23ffd56c\' stroke=\'%23c97c3a\' stroke-width=\'2\'/></svg>') center/contain no-repeat;
+      image-rendering: pixelated;
+      animation: bounce 1s cubic-bezier(.41,1.7,.84,.46) infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0);}
+      50% { transform: translateY(-16px);}
+    }
+    .sub {
+      font-size: 13px;
+      color: #ffd56c;
+      text-shadow: 1px 1px 0 #000;
+      margin-top: 18px;
+      opacity: .85;
+    }
+    .music-btn {
+      margin-top: 36px;
+      padding: 7px 18px;
+      border: none;
+      font-family: inherit;
+      font-size: 15px;
+      background: #ffd56c;
+      color: #2a1650;
+      border-radius: 8px;
+      cursor: pointer;
+      text-shadow: none;
+      box-shadow: 2px 2px 0px #c97c3a;
+      transition: background 0.2s;
+    }
+    .music-btn:active {
+      box-shadow: 0 0 3px #c97c3a;
+      background: #ffae00;
+    }
+    @media (max-width:500px) {
+      .message{font-size:14px;}
+      .coin{width:44px;height:44px;}
+      .player{width:32px;height:32px;}
+      .sub{font-size:10px;}
+    }
+  </style>
 </head>
 <body>
-  <h2>🎯 Чемпионат ГК Юнисервис</h2>
-
-  <div class="player-inputs">
-    <input id="player1Name" placeholder="Имя игрока №1" />
-    <input id="player2Name" placeholder="Имя игрока №2" />
+  <div class="container">
+    <div class="coin"></div>
+    <div class="message">
+      Пробный период окончен,<br>обратитесь в техничкую дирекцию<br>для оплаты
+    </div>
+    <div class="player"></div>
+    <div class="sub">unidars.ru &copy; 2024</div>
+    <button class="music-btn" onclick="toggleMusic()">&#127925; Включить музыку</button>
   </div>
-
-  <canvas id="dartboardCanvas" width="600" height="600"></canvas>
-
-  <div id="scoreDisplay"></div>
-  <button id="undoBtn">↩️ Отменить последний бросок</button>
-
-  <canvas id="fireworksCanvas" 
-        style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;display:none;z-index:9999;"></canvas>
-  <script src="script.js"></script>
+  <audio id="music" loop>
+    <source src="data:audio/mpeg;base64,//uQZAAAAAADhEBhAAABAAABAAAAAAAAAAAABAAARKwAABCxAgA..." type="audio/mpeg">
+    Ваш браузер не поддерживает звук!
+  </audio>
+  <script>
+    // Простая 8-битная "дудка" на встроенном Web Audio API
+    // Для максимальной совместимости сделан также аудиофайл-эмбед (маленький loop)
+    const music = document.getElementById('music');
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        document.querySelector('.music-btn').innerText = "⏸ Остановить музыку";
+      }
+      else {
+        music.pause();
+        music.currentTime = 0;
+        document.querySelector('.music-btn').innerText = "🎵 Включить музыку";
+      }
+    }
+  </script>
 </body>
 </html>
