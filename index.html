@@ -109,6 +109,7 @@
     <div class="message">
       Пробный период окончен,<br>обратитесь в техничкую дирекцию<br>для оплаты
     </div>
+
     <!-- WebM видео (стикер) -->
     <video
       src="sticker.webm"
@@ -118,25 +119,23 @@
       playsinline
       class="retro-video"
     ></video>
+
     <div class="player"></div>
     <div class="sub">unidars.ru &copy; 2024</div>
     <button class="music-btn" onclick="toggleMusic()">&#127925; Включить музыку</button>
   </div>
-  <audio id="music" loop>
-    <source src="data:audio/mpeg;base64,//uQZAAAAAADhEBhAAABAAABAAAAAAAAAAAABAAARKwAABCxAgA..." type="audio/mpeg">
-    Ваш браузер не поддерживает звук!
-  </audio>
+  <audio id="music" src="audio.mp3" loop></audio>
   <script>
-    const music = document.getElementById('music');
     function toggleMusic() {
-      if (music.paused) {
-        music.play();
-        document.querySelector('.music-btn').innerText = "⏸ Остановить музыку";
-      }
-      else {
-        music.pause();
-        music.currentTime = 0;
-        document.querySelector('.music-btn').innerText = "🎵 Включить музыку";
+      var audio = document.getElementById('music');
+      var btn = document.querySelector('.music-btn');
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = "⏸ Остановить музыку";
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+        btn.textContent = "🎵 Включить музыку";
       }
     }
   </script>
