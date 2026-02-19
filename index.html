@@ -96,37 +96,32 @@
     }
     /* АНИМАЦИЯ В ПРАВОМ ВЕРХУ */
     #uniservice-logo {
-      display: block;
-      position: fixed;
-      top: 18px;
-      right: 18px;
-      z-index: 99;
-    }
-    #uniservice-logo img {
-      width: 70px;
-      height: auto;
-      box-shadow: 0 0 18px #fff5, 0 0 4px #361c7a;
-      border-radius: 16px;
-      border: 2px solid #ffd56c;
-      background: #fff8;
-      transition: transform .15s;
-    }
-    #uniservice-logo:hover img {
-      transform: scale(1.07) rotate(-4deg);
-      box-shadow: 0 0 15px #ffd56c, 0 0 40px #3cf;
-    }
-    @media (max-width:500px) {
-      .message{font-size:14px;}
-      .coin{width:44px;height:44px;}
-      .player{width:32px;height:32px;}
-      .sub{font-size:10px;}
-      .retro-video{width:95vw;}
-      #uniservice-logo img {
-        width: 44px;
-        border-radius: 9px;
-      }
-      #uniservice-logo{top:6px; right:6px;}
-    }
+  display: block;
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 99;
+}
+#uniservice-logo img {
+  width: 280px;
+  height: auto;
+  box-shadow: 0 0 18px #fff5, 0 0 4px #361c7a;
+  border-radius: 16px;
+  border: 2px solid #ffd56c;
+  background: #fff8;
+  transition: transform .15s;
+}
+#uniservice-logo:hover img {
+  transform: scale(1.07) rotate(-4deg);
+  box-shadow: 0 0 15px #ffd56c, 0 0 40px #3cf;
+}
+@media (max-width:500px) {
+  #uniservice-logo img {
+    width: 176px;
+    border-radius: 9px;
+  }
+  #uniservice-logo{top:6px; right:6px;}
+}
   </style>
 </head>
 <body>
